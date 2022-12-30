@@ -1,11 +1,15 @@
 <HTML>
 <Head> <Title> Number to Word Conversion </Title></Head>
-<script>
+<script src="talkify.min.js">
 singleDigit= ["शून्य","एक","दो","तीन","चार","पाँच",
 // ,"छः","सात","आठ","नौ"];
 // twoDigit = ["Eleven","twelve","Thirteen","fourteen","fifteen","sixteen","seventeen","eighteen","nineteen"];
 // tenthplace=["ten","Twenty","thirty","forty","fifty","sixty","seventy","eighty","ninety"];
 // place = ["hundred","सौ","thousand","हज़ार","lakh", "लाख","crore"]
+Function readNumber(){
+var read = new talkify()TtsPlayer();
+read.playText(document.getElementById("NbrWrd").value);
+}
 function numbertoWord1(){
 
 	document.getElementById("NbrWrd").value=numbertoWord(parseInt(document.getElementById("UsrNbr").value)).toUpperCase()+" ONLY";
@@ -126,6 +130,7 @@ function unitDigit(number){
 <br>
 <button id="Subbtn" type="button" onClick=numbertoWord1()>Convert </button>
 <button id="Copybtn" type="button" onClick=copyBtn()>Copy </button>
+<button id="readbtn" type="button" onClick=readNumber()> Read Out Laud!</button>
 </form>
 
 </body>
