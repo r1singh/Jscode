@@ -8,6 +8,11 @@ function numbertoWord1(){
 	document.getElementById("NbrWrd").value=numbertoWord(parseInt(document.getElementById("UsrNbr").value)).toUpperCase()+" ONLY";
 
 }
+function readNumber(){
+	var msg = new SpeechSynthesisUtterance();
+	msg.text(document.getElementById("NbrWrd").value);
+	window.speechsynthesis.speak(msg);
+}
 
 function copyBtn(){
 
