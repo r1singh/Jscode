@@ -10,7 +10,7 @@ function numbertoWord1(){
 }
 function readNumber(){
 	var msg = new SpeechSynthesisUtterance();
-	msg.text(document.getElementById("NbrWrd").value);
+	msg.text=document.getElementById("NbrWrd").value;
 	window.speechsynthesis.speak(msg);
 }
 
