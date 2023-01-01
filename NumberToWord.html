@@ -131,10 +131,21 @@ function unitDigit(number){
     color: white;"
       >
 <lable id="numberlable">Enter your Number</lable>
-<input id="UsrNbr" type="text"/>
+<input id="UsrNbr" style="
+    border-color: black;
+    border-radius: 1rem;
+    height: 2rem;
+    margin-left: 1rem;
+    margin-bottom: .5rem;
+    background: #e6e3e3;
+" type="text"/>
 <br>
 <lable id="wordlable"> Your Number in Words</lable>
-<textarea id ="NbrWrd" rows="3" cols="30">
+<textarea id ="NbrWrd" rows="3" cols="30" style="
+    border-color: black;
+     height: 3rem;
+    background: #e6e3e3;
+">
 </textarea>
 <br>
 <button id="Subbtn" type="button" styel = "width: 6rem;color: white;background-color: steelblue;margin-top: 10%;border: none;border-radius: 1rem;height: 1.4rem;margin-left: 1rem;"onClick=numbertoWord1()>Convert </button>
