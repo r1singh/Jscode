@@ -124,10 +124,11 @@ function unitDigit(number){
     width: 400;
     height: 150;
     left: 30%;
-    background: beige;
+    background: #000e5a;
     padding: 1rem;
     font-style: italic;
-    font-size: 15;"
+    font-size: 15;
+    color: white;"
       >
 <lable id="numberlable">Enter your Number</lable>
 <input id="UsrNbr" type="text"/>
@@ -136,9 +137,24 @@ function unitDigit(number){
 <textarea id ="NbrWrd" rows="3" cols="30">
 </textarea>
 <br>
-<button id="Subbtn" type="button" onClick=numbertoWord1()>Convert </button>
-<button id="Copybtn" type="button" onClick=copyBtn()>Copy </button>
-<button id="readbtn" type="button" onClick=readNumber()> Read Out Laud!</button>
+<button id="Subbtn" type="button" styel = "width: 6rem;color: white;background-color: steelblue;margin-top: 10%;border: none;border-radius: 1rem;height: 1.4rem;margin-left: 1rem;"onClick=numbertoWord1()>Convert </button>
+<button id="Copybtn" type="button" onClick=copyBtn() style="
+    width: 6rem;
+    color: white;
+    background-color: steelblue;
+    margin: 10;
+    border: none;
+    border-radius: 1rem;
+    height: 1.4rem;">Copy </button>
+<button id="readbtn" type="button" onClick=readNumber() style="
+    width: 8rem;
+    color: white;
+    background-color: steelblue;
+    margin: 10;
+    border: none;
+    border-radius: 1rem;
+    height: 1.4rem;
+"> Read Out Laud!</button>
 </form>
 
 </body>
