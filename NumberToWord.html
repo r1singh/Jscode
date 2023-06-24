@@ -78,7 +78,7 @@ place = ["hundred","thousand","lakh","crore"];
         }
     }
 
-    else if (number<0)
+    else if (number<1 && number>0)
     {
 	    var new_num= parseFloat(number.toFixed(2)) * 100
 	    return (numbertoWord(new_num)+"Paisa")
