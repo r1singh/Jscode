@@ -8,7 +8,7 @@ function numbertoWord1(){
 	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
 	var Word=""
 	var paisa=""
-	if(number.lenght>1){
+	if(number.length>1){
 		if(parseInt(number[1].slice(0,2))>0){
 			paisa=" "+numbertoWord(parseInt(number[1].slice(0,2)))
 		}
