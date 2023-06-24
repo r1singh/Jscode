@@ -77,7 +77,13 @@ place = ["hundred","thousand","lakh","crore"];
           
         }
     }
-    else if (number>9 && number< 100) or (nuber<0)
+
+    else if (number<0)
+    {
+	    var new_num= number * 100
+	    return (numbertoWord(new_num)+"Paisa")
+    } 
+    else if (number>9 && number< 100)
     {
             var ud= parseInt(number%10);
             var td= parseInt(number/10);
