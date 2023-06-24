@@ -13,7 +13,10 @@ function numbertoWord1(){
 			paisa=" "+numbertoWord(parseInt(number[1].slice(0,2)))
 		}
 	}
-	word=numbertoWord(parseInt(number[0]))
+	if(parseInt(number[0])>0){
+		word=numbertoWord(parseInt(number[0]))
+	}
+	
 	document.getElementById("NbrWrd").value= word+paisa+" Only"
 		
 
