@@ -5,7 +5,7 @@
 
 function numbertoWord1(){
 
-	document.getElementById("NbrWrd").value=numbertoWord(parseInt(document.getElementById("UsrNbr").value)).toUpperCase()+" ONLY";
+	document.getElementById("NbrWrd").value=numbertoWord(parseFloat(document.getElementById("UsrNbr").value.replaceAll(",",""))).toUpperCase()+" ONLY";
 
 }
 function readNumber(){
