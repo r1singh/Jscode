@@ -34,7 +34,7 @@ place = ["hundred","thousand","lakh","crore"];
         {
             var quotient = parseInt(number / 100);
             
-            var reminder = parseInt(number % 100);
+            var reminder = parseFloat(number % 100);
            
            var b = unitDigit(quotient) + " hundred ";
            var a = numbertoWord(reminder);
