@@ -45,7 +45,22 @@ function numbertoWordhindi(number)
 	else if(number>=100 && number < 1000){
 		var firstdigit= parseInt(number/100)
 		var lastdigit= parseInt(number%100)
+		if( lastdigit!=0){
 		return (index[firstdigit]+" "+index_tenthplace[0]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[0])
+		} 
+	}
+	else if(number>=1000 && number < 10000){
+		var firstdigit= parseInt(number/1000)
+		var lastdigit= parseInt(number%1000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[0]
+		}
 	} 
 	
 }	
