@@ -3,6 +3,9 @@
 <script>
 
 
+function updatealert(){
+	alert("Now you can convert your number in hindi and english language..!!!")
+}
 function numbertoWord1(){
 
 	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
@@ -234,7 +237,7 @@ function unitDigit(number){
 
 </script>
 
-<body style= "background-color : #CDC9C9">
+<body onload =updatealert() style= "background-color : #CDC9C9">
 <form style="
     position: relative;
     top: 30%;
