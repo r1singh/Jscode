@@ -64,7 +64,7 @@ function numbertoWordhindi(number)
 	}
 	else if(number>=10000 && number < 100000){
 		var firstdigit= parseInt(number/1000)
-		var lastdigit= parseInt(number%10000)
+		var lastdigit= parseInt(number%1000)
 		if( lastdigit!=0){
 		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordhindi(lastdigit))
 		}
@@ -73,8 +73,8 @@ function numbertoWordhindi(number)
 		}
 	}
 	else if(number>=100000 && number < 1000000){
-		var firstdigit= parseInt(number/10000)
-		var lastdigit= parseInt(number%10000)
+		var firstdigit= parseInt(number/100000)
+		var lastdigit= parseInt(number%100000)
 		if( lastdigit!=0){
 		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordhindi(lastdigit))
 		}
@@ -83,7 +83,7 @@ function numbertoWordhindi(number)
 		}
 	}
 	else if(number>=1000000 && number < 10000000){
-		var firstdigit= parseInt(number/10000)
+		var firstdigit= parseInt(number/100000)
 		var lastdigit= parseInt(number%100000)
 		if( lastdigit!=0){
 		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordhindi(lastdigit))
@@ -93,8 +93,8 @@ function numbertoWordhindi(number)
 		}
 	}
 	else if(number>=10000000 && number < 100000000){
-		var firstdigit= parseInt(number/100000)
-		var lastdigit= parseInt(number%100000)
+		var firstdigit= parseInt(number/10000000)
+		var lastdigit= parseInt(number%10000000)
 		if( lastdigit!=0){
 		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordhindi(lastdigit))
 		}
@@ -103,8 +103,8 @@ function numbertoWordhindi(number)
 		}
 	}
 	else if(number>=100000000 && number < 1000000000){
-		var firstdigit= parseInt(number/10000)
-		var lastdigit= parseInt(number%10000)
+		var firstdigit= parseInt(number/10000000)
+		var lastdigit= parseInt(number%10000000)
 		if( lastdigit!=0){
 		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordhindi(lastdigit))
 		}
