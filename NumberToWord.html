@@ -6,19 +6,38 @@
 function numbertoWord1(){
 
 	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
+	var selectvalue = document.getElementById("langoption").value
 	var Word=""
 	var paisa=""
-	if(number.length>1){
-		if(parseInt(number[1].slice(0,2))>0){
-			paisa=" and "+numbertoWordhindi(parseInt(number[1].slice(0,2)))+" paisa"
+	var hindiwordrupee=" रुपये"
+	var hindiwordand=" और "
+	var hindiwordonly="मात्र "
+	var hindiwordpaise=" पैसे"
+	if(selectvalue =='1'){
+		if(number.length>1){
+			if(parseInt(number[1].slice(0,2))>0){
+				paisa=" and "+numbertoWord(parseInt(number[1].slice(0,2)))+" paisa"
+			}
 		}
+		if(parseInt(number[0])>0){
+			/*numbertoWord*/
+			word=numbertoWord(parseInt(number[0]))+" rupess"
+		}
+		document.getElementById("NbrWrd").value= word+paisa+" only"
 	}
-	if(parseInt(number[0])>0){
-		/*numbertoWord*/
-		word=numbertoWordhindi(parseInt(number[0]))
+	else{
+		if(number.length>1){
+			if(parseInt(number[1].slice(0,2))>0){
+				paisa=hindiwordand+numbertoWordhindi(parseInt(number[1].slice(0,2)))+hindiwordpaise
+			}
+		}
+		if(parseInt(number[0])>0){
+			/*numbertoWord*/
+			word=hindiwordonly+numbertoWordhindi(parseInt(number[0]))+hindiwordrupee
+		}
+		document.getElementById("NbrWrd").value= word+paisa
 	}
 	
-	document.getElementById("NbrWrd").value= word+paisa+" Only"
 		
 
 }
@@ -273,6 +292,10 @@ function unitDigit(number){
     border-radius: 1rem;
     height: 1.4rem;
 "> Read Out Laud!</button>
+<select name="langoption">
+	<option value=0 selected> English</option>
+	<option value=1> Hindi </option>
+</select>
 </form>
 
 </body>
