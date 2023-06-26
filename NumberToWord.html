@@ -52,12 +52,12 @@ function numbertoWord1(){
 	else {
 		if(number.length>1){
 			if(parseInt(number[1].slice(0,2))>0){
-				paisa=hindiwordand+numbertoWordhindi(parseInt(number[1].slice(0,2)))+hindiwordpaise
+				paisa=hindiwordand+numbertoWordpujabi(parseInt(number[1].slice(0,2)))+hindiwordpaise
 			}
 		}
 		if(parseInt(number[0])>0){
 			/*numbertoWord*/
-			word=hindiwordonly+numbertoWordhindi(parseInt(number[0]))+hindiwordrupee
+			word=hindiwordonly+numbertoWordpujabi(parseInt(number[0]))+hindiwordrupee
 		}
 		document.getElementById("NbrWrd").value= word+paisa
 	}
