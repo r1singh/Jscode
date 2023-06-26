@@ -12,10 +12,19 @@ function numbertoWord1(){
 	var selectvalue = document.getElementById("langoption").value
 	var Word=""
 	var paisa=""
+	if(selectvalue=='1'){
 	var hindiwordrupee=" रुपये"
 	var hindiwordand=" और "
 	var hindiwordonly="मात्र "
 	var hindiwordpaise=" पैसे"
+	}
+	else {
+	var hindiwordrupee=" ਰੁਪੇ"
+	var hindiwordand=" ਅਤੇ "
+	var hindiwordonly="ਸਿਰਫ਼ "
+	var hindiwordpaise=" ਪੈਸੇ"
+	}
+	
 	if(selectvalue =='0'){
 		if(number.length>1){
 			if(parseInt(number[1].slice(0,2))>0){
@@ -28,7 +37,7 @@ function numbertoWord1(){
 		}
 		document.getElementById("NbrWrd").value= word+paisa+" only"
 	}
-	else{
+	else if(selectvalue =='1') {
 		if(number.length>1){
 			if(parseInt(number[1].slice(0,2))>0){
 				paisa=hindiwordand+numbertoWordhindi(parseInt(number[1].slice(0,2)))+hindiwordpaise
@@ -40,9 +49,18 @@ function numbertoWord1(){
 		}
 		document.getElementById("NbrWrd").value= word+paisa
 	}
-	
-		
-
+	else {
+		if(number.length>1){
+			if(parseInt(number[1].slice(0,2))>0){
+				paisa=hindiwordand+numbertoWordhindi(parseInt(number[1].slice(0,2)))+hindiwordpaise
+			}
+		}
+		if(parseInt(number[0])>0){
+			/*numbertoWord*/
+			word=hindiwordonly+numbertoWordhindi(parseInt(number[0]))+hindiwordrupee
+		}
+		document.getElementById("NbrWrd").value= word+paisa
+	}
 }
 function readNumber(){
 	var msg = new SpeechSynthesisUtterance();
@@ -136,6 +154,86 @@ function numbertoWordhindi(number)
 	}
 }	
 
+function numbertoWordpunjabi(number)
+{
+	index=["ਸਿਫਰ",	"ਇੱਕ",	"ਦੋ","ਤਿੱਨ","ਚਾਰ","ਪੰਜ",	"ਛੇ",	"ਸੱਤ",	"ਅੱਠ",	"ਨੌੰ",	"ਦੱਸ",	"ਗਿਆਰਾਂ",	"ਬਾਰਾਂ",	"ਤੇਰਾਂ",	"ਚੌਦਾਂ",	"ਪੰਦਰਾਂ",	"ਸੋਲ਼ਾਂ",	"ਸਤਾਰਾਂ",	"ਅਠਾਰਾਂ",	"ਉਨੀ",	"ਵੀਹ",	"ਇੱਕੀ",	"ਬਾਈ",	"ਤੇਈ",	"ਚੌਵੀ",	"ਪੱਚੀ",	"ਛੱਬੀ",	"ਸਤਾਈ",	"ਅਠਾਈ",	"ਉਣੱਤੀ",	"ਤੀਹ",	"ਇਕੱਤੀ",	"ਬੱਤੀ",	"ਤੇਤੀ",	"ਚੌਂਤੀ",	"ਪੈਂਤੀ",	"ਛੱਤੀ",	"ਸੈਂਤੀ",	"ਅਠੱਤੀ",	"ਉਣਤਾਲ਼ੀ",	"ਚਾਲੀ",	"ਇਕਤਾਲੀ",	"ਬਿਆਲੀ",	"ਤਰਤਾਈ",	"ਚੁਤਾਲੀ",	"ਪਨਤਾਲੀ",	"ਛਿਆਲੀ",	"ਸਨਤਾਲੀ",	"ਅਠਤਾਲੀ",	"ਉਨੰਜਾ",	"ਪੰਜਾਹ",	"ਇਕਵੰਜਾ",	"ਬਵੰਜਾ",	"ਤਰਵੰਜਾ",	"ਚਰਵੰਜਾ",	"ਪਚਵੰਜਾ",	"ਛਪੰਜਾ",	"ਸਤਵੰਜਾ",	"ਅਠਵੰਜਾ",	"ਉਨਾਹਠ",	"ਸੱਠ",	"ਇਕਾਹਠ",	"ਬਾਹਠ",	"ਤਰੇਂਹਠ",	"ਚੌਂਹਠ",	"ਪੈਂਹਠ",	"ਛਿਆਹਠ",	"ਸਤਾਹਠ",	"ਅਠਾਹਠ",	"ਉਨੱਤਰ",	"ਸੱਤਰ",	"ਇਕਹੱਤਰ",	"ਬਹੱਤਰ",	"ਤਹੇਤਰ",	"ਚਹੱਤਰ",	"ਪਚੱਤਰ",	"ਛਿਅੱਤਰ",	"ਸਤੱਤਰ",	"ਅਠੱਤਰ",	"ਉਨਾਸੀ",	"ਅੱਸੀ",	"ਇਕਆਸੀ",	"ਬਿਆਸੀ",	"ਤਿਰਾਸੀ",	"ਚੌਰਾਸੀ",	"ਪਚਾਸੀ",	"ਛਿਆਸੀ",	"ਸਤਾਸੀ",	"ਅਠਾਸੀ",	"ਉਨੱਨਵੇਂ",	"ਨੱਬੇ",	"ਇਕੱਨਵੇ",	"ਬੱਨਵੇ",	"ਤਰੱਨਵੇ",	"ਚਰੱਨਵੇ",	"ਪਚੱਨਵੇ",	"ਛਿਅੱਨਵੇ",	"ਸਤੱਨਵੇ",	"ਅਠੱਨਵੇ",	"ਨੜਿੱਨਵੇ"]
+        index_tenthplace=["ਸੌ ",	"ਹਜਾਰ ","ਲੱਖ ","ਕਰੋੜ "]
+	
+	if(number >0 && number <100){
+		return index[number]
+	}
+	else if(number>=100 && number < 1000){
+		var firstdigit= parseInt(number/100)
+		var lastdigit= parseInt(number%100)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[0]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[0])
+		} 
+	}
+	else if(number>=1000 && number < 10000){
+		var firstdigit= parseInt(number/1000)
+		var lastdigit= parseInt(number%1000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[1])
+		}
+	}
+	else if(number>=10000 && number < 100000){
+		var firstdigit= parseInt(number/1000)
+		var lastdigit= parseInt(number%1000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[1])
+		}
+	}
+	else if(number>=100000 && number < 1000000){
+		var firstdigit= parseInt(number/100000)
+		var lastdigit= parseInt(number%100000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[2])
+		}
+	}
+	else if(number>=1000000 && number < 10000000){
+		var firstdigit= parseInt(number/100000)
+		var lastdigit= parseInt(number%100000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[2])
+		}
+	}
+	else if(number>=10000000 && number < 100000000){
+		var firstdigit= parseInt(number/10000000)
+		var lastdigit= parseInt(number%10000000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[3])
+		}
+	}
+	else if(number>=100000000 && number < 1000000000){
+		var firstdigit= parseInt(number/10000000)
+		var lastdigit= parseInt(number%10000000)
+		if( lastdigit!=0){
+		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordhindi(lastdigit))
+		}
+		else{
+			return (index[firstdigit]+" "+index_tenthplace[3])
+		}
+	}
+}	
+	
 function numbertoWord(number)
 { 
 singleDigit= [ "zero","one","two","three","four","five","six","seven", "eight","nine"];
@@ -273,6 +371,7 @@ function unitDigit(number){
     box-shadow: none;" >
 	<option value=0 selected> English</option>
 	<option value=1> Hindi </option>
+	<option value=2> Punjabi </option>
 </select>
 <lable id="wordlable"> Your Number in Words</lable>
 <textarea id ="NbrWrd" rows="3" cols="30" style="
