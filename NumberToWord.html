@@ -66,7 +66,8 @@ function numbertoWord1(){
 		document.getElementById("NbrWrd").value= word+paisa
 	
 	}
-		alert("Function took "+performance.now()-start+"milliseconds to process");
+	var EndTime = performace.now();	
+	alert("Function took "${StartTime-EndTime}"milliseconds to process");
 }
 function readNumber(){
 	var msg = new SpeechSynthesisUtterance();
