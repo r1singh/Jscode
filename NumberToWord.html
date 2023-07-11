@@ -9,6 +9,10 @@ function updatealert(){
 function numbertoWord1(){
 
 	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
+	if(number[0].length>9){
+		aleart("Please entered number should be less than 100CR, Thank You");
+	exit();
+	}
 	var selectvalue = document.getElementById("langoption").value
 	var Word=""
 	var paisa=""
