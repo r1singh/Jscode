@@ -64,8 +64,9 @@ function numbertoWord1(){
 			word=hindiwordonly+numbertoWordpunjabi(parseInt(number[0]))+hindiwordrupee
 		}
 		document.getElementById("NbrWrd").value= word+paisa
-		alert("Function took "+performance.now()-start+"milliseconds to process");
+	
 	}
+		alert("Function took "+performance.now()-start+"milliseconds to process");
 }
 function readNumber(){
 	var msg = new SpeechSynthesisUtterance();
