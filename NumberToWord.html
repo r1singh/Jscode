@@ -7,6 +7,7 @@ function updatealert(){
 	alert("Now you can convert your number upto 100 cr in hindi,panjabi  and english language..!!!")
 }
 function numbertoWord1(){
+	try{
 	var StartTime = performance.now();
 	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
 	if(number[0].length>9){
@@ -68,6 +69,10 @@ function numbertoWord1(){
 	}
 	var EndTime = performance.now();	
 	alert("Function took "${StartTime-EndTime}"milliseconds to process");
+	}
+	catch(error){
+		alert(error);
+	}
 }
 function readNumber(){
 	var msg = new SpeechSynthesisUtterance();
