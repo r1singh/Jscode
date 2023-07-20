@@ -8,7 +8,7 @@ function updatealert(){
 }
 function numbertoWord1(){
 	try{
-	var StartTime = performance.now();
+	
 	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
 	if(number[0].length>9){
 		alert("Entered number should be less than 100CR, Thank You");
@@ -67,8 +67,7 @@ function numbertoWord1(){
 		document.getElementById("NbrWrd").value= word+paisa
 	
 	}
-	var EndTime = performance.now();	
-	alert("Function took "${StartTime-EndTime}"milliseconds to process");
+	
 	}
 	catch(error){
 		alert(error);
