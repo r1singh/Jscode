@@ -33,14 +33,14 @@ function numbertoWord1(){
 	if(selectvalue =='0'){
 		if(number.length>1){
 			if(parseInt(number[1].slice(0,2))>0){
-				paisa=" and "+numbertoWord(parseInt(number[1].slice(0,2)))+" paisa"
+				paisa=" and "+numbertoWord(parseInt(number[1].slice(0,2)))+" Paisa"
 			}
 		}
 		if(parseInt(number[0])>0){
 			/*numbertoWord*/
-			word=numbertoWord(parseInt(number[0]))+" rupess"
+			word=numbertoWord(parseInt(number[0]))+" Rupess"
 		}
-		document.getElementById("NbrWrd").value= word+paisa+" only"
+		document.getElementById("NbrWrd").value= word+paisa+" Only"
 	}
 	else if(selectvalue =='1') {
 		if(number.length>1){
