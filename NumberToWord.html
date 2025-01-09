@@ -1,431 +1,555 @@
-<HTML>
-<Head> <Title> Number to Word Conversion </Title></Head>
-<script> 
+<html>
 
+<head>
 
-function updatealert(){
-	alert("Now you can convert your number upto 100 cr in hindi,panjabi  and english language..!!!")
-}
-function numbertoWord1(){
-	try{
-	
-	var number = document.getElementById("UsrNbr").value.replaceAll(",","").split(".");
-	if(number[0].length>9){
-		alert("Entered number should be less than 100CR, Thank You");
-	return;
-	}
-	var selectvalue = document.getElementById("langoption").value
-	var Word=""
-	var paisa=""
-	if(selectvalue=='1'){
-	var hindiwordrupee=" रुपये"
-	var hindiwordand=" और " 
-	var hindiwordonly="मात्र "
-	var hindiwordpaise=" पैसे"
-	}
-	else {
-	var hindiwordrupee=" ਰੁਪੇ"
-	var hindiwordand=" ਅਤੇ "
-	var hindiwordonly="ਸਿਰਫ਼ "
-	var hindiwordpaise=" ਪੈਸੇ"
-	}
-	
-	if(selectvalue =='0'){
-		if(number.length>1){
-			if(parseInt(number[1].slice(0,2))>0){
-				paisa=" and "+numbertoWord(parseInt(number[1].slice(0,2)))+" Paisa"
-			}
-		}
-		if(parseInt(number[0])>0){
-			/*numbertoWord*/
-			word=numbertoWord(parseInt(number[0]))+" Rupess"
-		}
-		document.getElementById("NbrWrd").value= word+paisa+" Only"
-	}
-	else if(selectvalue =='1') {
-		if(number.length>1){
-			if(parseInt(number[1].slice(0,2))>0){
-				paisa=hindiwordand+numbertoWordhindi(parseInt(number[1].slice(0,2)))+hindiwordpaise
-			}
-		}
-		if(parseInt(number[0])>0){
-			/*numbertoWord*/
-			word=hindiwordonly+numbertoWordhindi(parseInt(number[0]))+hindiwordrupee
-		}
-		document.getElementById("NbrWrd").value= word+paisa
-	}
-	else {
-		if(number.length>1){
-			if(parseInt(number[1].slice(0,2))>0){
-				paisa=hindiwordand+numbertoWordpunjabi(parseInt(number[1].slice(0,2)))+hindiwordpaise
-			}
-		}
-		if(parseInt(number[0])>0){
-			/*numbertoWord*/
-			word=hindiwordonly+numbertoWordpunjabi(parseInt(number[0]))+hindiwordrupee
-		}
-		document.getElementById("NbrWrd").value= word+paisa
-	
-	}
-	
-	}
-	catch(error){
-		alert(error);
-	}
-}
-function readNumber(){
-	var msg = new SpeechSynthesisUtterance();
-	msg.text=document.getElementById("NbrWrd").value;
-	window.speechSynthesis.speak(msg);
-}
-
-function copyBtn(){
-
-	var copytext = document.getElementById("NbrWrd").value;
-	navigator.clipboard.writeText(copytext);
-	alert(copytext);
-}
-
-function numbertoWordhindi(number)
-{
-	index=["शून्य",	"एक",	"दो",	"तीन",	"चार",	"पाँच",	"छह",	"सात",	"आठ",	"नौ",	"दस",	"ग्यारह","बारह","तेरह","चौदह","पन्द्रह","सोलह","सत्रह","अठारह","उन्नीस","बीस","इक्कीस","बाईस","तेईस",	"चौबीस","पच्चीस","छब्बीस","सत्ताईस","अट्ठाईस",	"उनतीस","तीस",	"इकतीस","बत्तीस","तैंतीस","चौंतीस","पैंतीस",	"छत्तीस","सैंतीस",	"अड़तीस","उनतालीस","चालीस","इकतालीस",	"बयालीस",	"तैंतालीस",	"चौंतालीस",	"पैंतालीस",	"छियालीस","सैंतालीस","अड़तालीस",	"उनचास",	"पचास",	"इक्याबन",	"बावन",	"तिरेपन",	"चौबन",	"पचपन","छप्पन",	"सत्तावन",	"अट्ठावन",	"उनसठ",	"साठ",	"इकसठ",	"बासठ",	"तिरसठ","चौंसठ","पैंसठ",	"छियासठ",	"सड़सठ",	"अड़सठ",	"उनहत्तर",	"सत्तर",	"इकहत्तर","बहत्तर","तिहत्तर",	"चौहत्तर",	"पचहत्तर",	"छिहत्तर",	"सतहत्तर",	"अठहत्तर","उनासी","अस्सी",	"इक्यासी","बयासी","तिरासी","चौरासी","पचासी",	"छियासी","सतासी","अठासी","नवासी",	"नब्बे","इक्यानबे","बानवे","तिरानवे","चौरानवे","पचानवे","छियानवे",	"सत्तानवे","अट्ठानवे","निन्यानवे"]
-        index_tenthplace=["सौ","हज़ार","लाख","करोड़"]
-	if(number >0 && number <100){
-		return index[number]
-	}
-	else if(number>=100 && number < 1000){
-		var firstdigit= parseInt(number/100)
-		var lastdigit= parseInt(number%100)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[0]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[0])
-		} 
-	}
-	else if(number>=1000 && number < 10000){
-		var firstdigit= parseInt(number/1000)
-		var lastdigit= parseInt(number%1000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[1])
-		}
-	}
-	else if(number>=10000 && number < 100000){
-		var firstdigit= parseInt(number/1000)
-		var lastdigit= parseInt(number%1000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[1])
-		}
-	}
-	else if(number>=100000 && number < 1000000){
-		var firstdigit= parseInt(number/100000)
-		var lastdigit= parseInt(number%100000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[2])
-		}
-	}
-	else if(number>=1000000 && number < 10000000){
-		var firstdigit= parseInt(number/100000)
-		var lastdigit= parseInt(number%100000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[2])
-		}
-	}
-	else if(number>=10000000 && number < 100000000){
-		var firstdigit= parseInt(number/10000000)
-		var lastdigit= parseInt(number%10000000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[3])
-		}
-	}
-	else if(number>=100000000 && number < 1000000000){
-		var firstdigit= parseInt(number/10000000)
-		var lastdigit= parseInt(number%10000000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordhindi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[3])
-		}
-	}
-}	
-
-function numbertoWordpunjabi(number)
-{
-	index=["ਸਿਫਰ",	"ਇੱਕ",	"ਦੋ","ਤਿੱਨ","ਚਾਰ","ਪੰਜ",	"ਛੇ",	"ਸੱਤ",	"ਅੱਠ",	"ਨੌੰ",	"ਦੱਸ",	"ਗਿਆਰਾਂ",	"ਬਾਰਾਂ",	"ਤੇਰਾਂ",	"ਚੌਦਾਂ",	"ਪੰਦਰਾਂ",	"ਸੋਲ਼ਾਂ",	"ਸਤਾਰਾਂ",	"ਅਠਾਰਾਂ",	"ਉਨੀ",	"ਵੀਹ",	"ਇੱਕੀ",	"ਬਾਈ",	"ਤੇਈ",	"ਚੌਵੀ",	"ਪੱਚੀ",	"ਛੱਬੀ",	"ਸਤਾਈ",	"ਅਠਾਈ",	"ਉਣੱਤੀ",	"ਤੀਹ",	"ਇਕੱਤੀ",	"ਬੱਤੀ",	"ਤੇਤੀ",	"ਚੌਂਤੀ",	"ਪੈਂਤੀ",	"ਛੱਤੀ",	"ਸੈਂਤੀ",	"ਅਠੱਤੀ",	"ਉਣਤਾਲ਼ੀ",	"ਚਾਲੀ",	"ਇਕਤਾਲੀ",	"ਬਿਆਲੀ",	"ਤਰਤਾਈ",	"ਚੁਤਾਲੀ",	"ਪਨਤਾਲੀ",	"ਛਿਆਲੀ",	"ਸਨਤਾਲੀ",	"ਅਠਤਾਲੀ",	"ਉਨੰਜਾ",	"ਪੰਜਾਹ",	"ਇਕਵੰਜਾ",	"ਬਵੰਜਾ",	"ਤਰਵੰਜਾ",	"ਚਰਵੰਜਾ",	"ਪਚਵੰਜਾ",	"ਛਪੰਜਾ",	"ਸਤਵੰਜਾ",	"ਅਠਵੰਜਾ",	"ਉਨਾਹਠ",	"ਸੱਠ",	"ਇਕਾਹਠ",	"ਬਾਹਠ",	"ਤਰੇਂਹਠ",	"ਚੌਂਹਠ",	"ਪੈਂਹਠ",	"ਛਿਆਹਠ",	"ਸਤਾਹਠ",	"ਅਠਾਹਠ",	"ਉਨੱਤਰ",	"ਸੱਤਰ",	"ਇਕਹੱਤਰ",	"ਬਹੱਤਰ",	"ਤਹੇਤਰ",	"ਚਹੱਤਰ",	"ਪਚੱਤਰ",	"ਛਿਅੱਤਰ",	"ਸਤੱਤਰ",	"ਅਠੱਤਰ",	"ਉਨਾਸੀ",	"ਅੱਸੀ",	"ਇਕਆਸੀ",	"ਬਿਆਸੀ",	"ਤਿਰਾਸੀ",	"ਚੌਰਾਸੀ",	"ਪਚਾਸੀ",	"ਛਿਆਸੀ",	"ਸਤਾਸੀ",	"ਅਠਾਸੀ",	"ਉਨੱਨਵੇਂ",	"ਨੱਬੇ",	"ਇਕੱਨਵੇ",	"ਬੱਨਵੇ",	"ਤਰੱਨਵੇ",	"ਚਰੱਨਵੇ",	"ਪਚੱਨਵੇ",	"ਛਿਅੱਨਵੇ",	"ਸਤੱਨਵੇ",	"ਅਠੱਨਵੇ",	"ਨੜਿੱਨਵੇ"]
-        index_tenthplace=["ਸੌ ",	"ਹਜਾਰ ","ਲੱਖ ","ਕਰੋੜ "]
-	
-	if(number >0 && number <100){
-		return index[number]
-	}
-	else if(number>=100 && number < 1000){
-		var firstdigit= parseInt(number/100)
-		var lastdigit= parseInt(number%100)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[0]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[0])
-		} 
-	}
-	else if(number>=1000 && number < 10000){
-		var firstdigit= parseInt(number/1000)
-		var lastdigit= parseInt(number%1000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[1])
-		}
-	}
-	else if(number>=10000 && number < 100000){
-		var firstdigit= parseInt(number/1000)
-		var lastdigit= parseInt(number%1000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[1]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[1])
-		}
-	}
-	else if(number>=100000 && number < 1000000){
-		var firstdigit= parseInt(number/100000)
-		var lastdigit= parseInt(number%100000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[2])
-		}
-	}
-	else if(number>=1000000 && number < 10000000){
-		var firstdigit= parseInt(number/100000)
-		var lastdigit= parseInt(number%100000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[2]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[2])
-		}
-	}
-	else if(number>=10000000 && number < 100000000){
-		var firstdigit= parseInt(number/10000000)
-		var lastdigit= parseInt(number%10000000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[3])
-		}
-	}
-	else if(number>=100000000 && number < 1000000000){
-		var firstdigit= parseInt(number/10000000)
-		var lastdigit= parseInt(number%10000000)
-		if( lastdigit!=0){
-		return (index[firstdigit]+" "+index_tenthplace[3]+" "+numbertoWordpunjabi(lastdigit))
-		}
-		else{
-			return (index[firstdigit]+" "+index_tenthplace[3])
-		}
-	}
-}	
-	
-function numbertoWord(number)
-{ 
-singleDigit= [ "Zero","One","Two","Three","Four","Five","Six","Seven", "Eight","Nine"];
-twoDigit = ["Eleven","Twelve","Thirteen","Fourteen","Fifteen","Sixteen","Seventeen","Eighteen","Nineteen"];
-tenthplace=["Ten","Twenty","Thirty","Forty","Fifty","Sixty","Seventy","Eighty","Ninety"];
-place = ["Hundred","Thousand","Lakh","Crore"];
-
-    if(number >= 100)
-    {
-        if(number >= 100 && number < 1000)
-        {
-            var quotient = parseInt(number / 100);
-            
-            var reminder = (number % 100);
-           
-           var b = unitDigit(quotient) + " Hundred ";
-           var a = numbertoWord(reminder);
-            return b+a;
-        }
-       else if (number >= 1000 && number <100000)
-        {
-            var digitArr = []
-            digitArr[0] = parseInt(number / 1000);
-            digitArr[1] = (number % 1000);
-          
-            // var b = twoDigit(quotient) + " Thousand";
-            // console.log(b);
-         return (numbertoWord(digitArr[0])+""+" Thousand " + numbertoWord(digitArr[1]));
-                     ;
-          
-        }
-        else if (number >= 100000 && number <10000000)
-        {
-            var digitArr = []
-            digitArr[0] = parseInt(number / 100000);
-            digitArr[1] = (number % 100000);
-          
-            // var b = twoDigit(quotient) + " Thousand";
-            // console.log(b);
-         return (numbertoWord(digitArr[0])+""+" Lakh " + numbertoWord(digitArr[1]));
-                     ;
-          
-        }
-        else if (number >= 10000000 && number <1000000000)
-        {
-            var digitArr = []
-            digitArr[0] = parseInt(number / 10000000);
-            digitArr[1] = (number % 10000000);
-          
-            // var b = twoDigit(quotient) + " Thousand";
-            // console.log(b);
-         return (numbertoWord(digitArr[0])+""+" Crore " + numbertoWord(digitArr[1]));
-                     ;
-          
-        }
-    }
-
-    else if (number>9 && number< 100)
-    {
-            var ud= parseInt(number%10);
-	    var td= parseInt(number/10);
-            console.log(number)
-            if(ud==0)
-            {
-               return tenthplace[td-1];
-	    }
-            else 
-            {
-                if(td == 1)
-                {
-        
-		    return twoDigit[ud-1];
-               }
-                else{
-			 return (tenthplace[td-1]+"-"+ singleDigit[ud])
-		                         
-                    
-                }
-            }
-     }
- else{
-    if (number != 0)
-    {
-	   return (singleDigit[number])
-	
-	    }
-    else return ''
- } 
+    
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="google" content="notranslate" />
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport" />
+    <title>!! Kumbh Mela 2025!</title>
+    <link rel="stylesheet" href="animate.min.css">
    
+body{
+        background: #f8f8f8;
+        margin:0;
+      }
+      .mainContainer {
+        background: white;
+        max-width: 450px;
+        min-height: 200px;
+        margin: 0 auto;
+        text-align: center;
+        padding: 15px;
+        color: #999;
+        padding-bottom: 60px;
+
+        box-shadow: 0 0 10px 1px rgba(0,0,0,.14), 0 1px 14px 2px rgba(0,0,0,.12), 0 0 5px -3px rgba(0,0,0,.3);
+
+
+      }
+
+#name {
+     
+      animation: name 4s infinite; 
+      text-transform: capitalize;
+      margin-bottom: 5px;
+      font-size: 50px;
+      padding: 0 10px;
+      font-family: 'Teko', sans-serif;
+} 
+
+#usernameb { color: black;  /* Fallback: assume this color ON TOP of image */
+   background: url(Pics/sname.gif?v=778866);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+          animation: swing 4s infinite;
+            text-transform: uppercase;
+          margin-bottom: 5px;
+          font-size: 25px;
+          padding: 0 10px;
+    font-family: 'SF Espresso Shack', cursive;
+}
+
+
+.m1{position:fixed;left:1%; width:auto;height:100%;top:1%;color:#000;}
+.m2{position:fixed;right:1%; width:auto;height:100%;top:1%;color:#000;}
+
+
+/* Custom Animation classes */     
+.name {
+	color: #fff;
+    	margin: 6px;
+    	padding: 25px 20px;
+    	font-size: 48px;
+    	font-family: sans-serif;
+}
+
+.enter-name input[type=name] {
+	background-color: yellow;
+	color: black;
+	font-weight:bold;
+   	border-radius: 10px;
+    	box-sizing: border-box;
+    	border:2px solid black;
+    	padding: 5px;
+    	position: fixed;
+    	left: 10px;
+    	bottom: 5px;
+    	height: 50px;
+    	width: 70%;
+    	text-align: center;
+    	font-size: 22px;
+    	display: inline-block;
+}
+
+.enter-name .btn {
+	border-radius: 10px;
+    	font-size: 21px;
+    	padding: 4px;
+    	position: fixed;
+    	right: 2px;
+    	bottom: 5px;
+    	height: 50px;
+    	width: 23%;
+    	display: inline-block;
+    	color: white;
+    	font-weight:600;
+    	background-color: red;
+    	border: 2px solid black;
+    	letter-spacing: .5px;
+    	transition: .2s ease-out;
+    	cursor: pointer;
+    	line-height: 36px;
+    	outline: 0;
+    	text-transform: uppercase;
+    	vertical-align: middle;
+    	text-decoration: none;
+    	animation-duration: 4s !important;
+}
+
+.enter-name input[type=name]::-webkit-input-placeholder { 
+	color: black;
+  	font-size: 18px;	
+}
+
+.enter-name input[type=name]::-moz-placeholder { 
+	color: black;
+  	font-size: 18px;
+}
+
+.enter-name input[type=name]:focus::-webkit-input-placeholder {
+    color: black;
+}
+
+.enter-name input[type=name]:focus::-moz-placeholder { 
+	color: black;
+  	font-size: 18px;
+}
+
+
+#demo
+{
+  
+    color: red;
+    font-size: 22px;
+    font-weight: bold;
+    animation: pulse 2s infinite;
+    width:87%;
+    margin:5px auto;
+}
+
+
+
+
+a.rope
+{
+    text-decoration:none;
+}
+.wishMessage {
+        color: #fff;
+        font-size: 22px;
+        font-weight: bold;
+        margin-top: 20px;
+        text-shadow: 0px 0px 10px #afafaf;
+      }
+      .wishMessage p{
+        margin: 0.3em 0;
+      }
+/* Custom Animation classes */ 
+#show-name {
+  font-size: 25px;
+  display: inline-block;
+  margin-bottom: 5px;
+  animation: swing 1s infinite, glow 20s infinite; }
+
+@keyframes glow {
+  0%, 100% {
+    text-shadow: 0 0 30px red; }
+  25% {
+    text-shadow: 0 0 30px orange; }
+  50% {
+    text-shadow: 0 0 30px forestgreen; }
+  75% {
+    text-shadow: 0 0 30px cyan; } }  
+figure {
+  animation:wobble 5s ease-in-out infinite;
+  transform-origin:center center;
+  transform-style:preserve-3d;
+}@keyframes wobble {
+  0%,100%{ transform:rotate3d(1,1,0,40deg); }
+  25%{ transform:rotate3d(-1,1,0,40deg); }
+  50%{ transform:rotate3d(-1,-1,0,40deg); }
+  75%{ transform:rotate3d(1,-1,0,40deg); }
+}
+</style>
+
+<style type="text/css">
+      *{
+        margin:0;
+        padding:0;
+      }
+      body {
+        text-align: center;
+        
+      }
+      img{
+      border: none;
+    }
+.leftcurtain{
+      width: 100%;
+      height: 70%;
+      top: 0px;
+      left: 0px;
+      position: absolute;
+      z-index: 2;
+    }
+     .rightcurtain{
+      width: 100%;
+      height: 120%;
+      right: 0px;
+      top: 0px;
+      position: absolute;
+      z-index: 3;
+    }
+    .rightcurtain img, .leftcurtain img{
+      width: 100%;
+      height: 100%;
+    }
+    .logo{
+      margin: 0px auto;
+      margin-top: 150px;
+    }
+    .rope{
+	position: absolute;
+    top: 10px;
+    left: 23%;
+    z-index: 4;
+}
+    } 
+.centered {
+    position: absolute;
+    top: 70%;
+    left: 55%;
+    transform: translate(-50%, -50%);
+}
+a.rope
+{
+    text-decoration:none;
+}
+
+
+
+
+@keyframes aadisoni{
+  0% {
+    transform:  translate(0px,0px)  rotate(0deg) ;
+  }
+  15% {
+    transform:  translate(-25px,0px)  rotate(-5deg) ;
+  }
+  30% {
+    transform:  translate(20px,0px)  rotate(3deg) ;
+  }
+  45% {
+    transform:  translate(-15px,0px)  rotate(-3deg) ;
+  }
+  60% {
+    transform:  translate(10px,0px)  rotate(2deg) ;
+  }
+  75% {
+    transform:  translate(-5px,0px)  rotate(-1deg) ;
+  }
+  100% {
+    transform:  translate(0px,0px)  rotate(0deg) ;
+  }
+}
+
+@-webkit-keyframes aadisoni {
+  0% {
+    -webkit-transform:  translate(0px,0px)  rotate(0deg) ;
+  }
+  15% {
+    -webkit-transform:  translate(-25px,0px)  rotate(-5deg) ;
+  }
+  30% {
+    -webkit-transform:  translate(20px,0px)  rotate(3deg) ;
+  }
+  45% {
+    -webkit-transform:  translate(-15px,0px)  rotate(-3deg) ;
+  }
+  60% {
+    -webkit-transform:  translate(10px,0px)  rotate(2deg) ;
+  }
+  75% {
+    -webkit-transform:  translate(-5px,0px)  rotate(-1deg) ;
+  }
+  100% {
+    -webkit-transform:  translate(0px,0px)  rotate(0deg) ;
+  }
+}
+
+
+
+@keyframes name {
+  0%   {color:red;}
+  20%   {color:white;}
+  40%   {color:yellow;}
+  60%   {color:orange;}
+  80%   {color:cyan;}
+  100% {color:#f45bf4;}
+}
+
+
+.glow {
+  width:50%;
+  padding: 2px;
+  background-color: #FF1493	;
+  animation: glow 2s infinite;
+  font-size:25px;
+  font-family: 'Ranga', cursive;
+  color:white;
+  margin:auto;
+  text-align:center;
+  border-radius:10px;
+  text-shadow:1px 2px 6px black;
 
 }
-function unitDigit(number){
-     singleDigit= [ "Zero","One","Two","Three","Four","Five","Six","Seven", "Eight","Nine"];
-     if (number == 0){
-         
-     }
-     else {  return singleDigit[number]}
+
+@keyframes glow {
+  0%   {box-shadow: 0px 0px 0px #FF1493	;}
+  100%   {box-shadow: 0px 0px 20px 5px #ffb3db;}
+ 
 }
-function play(){
+
+</style>
+<style type="text/css">
+canvas {
+	cursor: crosshair;
+	display: block;
+}
+*{margin:0;padding:0}body{text-align:center}img{border:none}.leftcurtain{width:100%;height:100%;top:0;left:0px;position:absolute;z-index:2}.rightcurtain{width:100%;height:100%;right:0px;top:0;position:absolute;z-index:3}.rightcurtain img,.leftcurtain img{width:100%;height:100%}.logo{margin:0 auto;margin-top:150px}.rope{position:absolute;top:10px;left:23%;z-index:4}.centered{position:absolute;top:75%;left:50%;transform:translate(-50%,-50%)}.aadi{background-image:url();background-repeat:no-repeat;background-attachment:fixed;background-position:top}.matki{height:200px;}@keyframes aadisoni{0%{transform:translate(0px,0px) rotate(0deg)}15%{transform:translate(-25px,0px) rotate(-5deg)}30%{transform:translate(20px,0px) rotate(3deg)}45%{transform:translate(-15px,0px) rotate(-3deg)}60%{transform:translate(10px,0px) rotate(2deg)}75%{transform:translate(-5px,0px) rotate(-1deg)}100%{transform:translate(0px,0px) rotate(0deg)}}@-webkit-keyframes aadisoni{0%{-webkit-transform:translate(0px,0px) rotate(0deg)}15%{-webkit-transform:translate(-25px,0px) rotate(-5deg)}30%{-webkit-transform:translate(20px,0px) rotate(3deg)}45%{-webkit-transform:translate(-15px,0px) rotate(-3deg)}60%{-webkit-transform:translate(10px,0px) rotate(2deg)}75%{-webkit-transform:translate(-5px,0px) rotate(-1deg)}100%{-webkit-transform:translate(0px,0px) rotate(0deg)}}
+#username {
+     color: black;  /* Fallback: assume this color ON TOP of image */
+   background: url(img/namegif.gif?v=778866);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+          animation: swing 4s infinite;
+            text-transform: uppercase;
+          margin-bottom: 5px;
+          font-size: 40px;
+          padding: 0 10px;
+    font-family: 'SF Espresso Shack', cursive;
+} 
+
+#usernameb { color: black;  /* Fallback: assume this color ON TOP of image */
+   background: url(img/namegif.gif?v=778866);
+   -webkit-background-clip: text;
+   -webkit-text-fill-color: transparent;
+          animation: swing 4s infinite;
+            text-transform: uppercase;
+          margin-bottom: 5px;
+          font-size: 25px;
+          padding: 0 10px;
+    font-family: 'SF Espresso Shack', cursive;
+}
+#loading {
+  animation: tada 3s infinite;
+}
+@-webkit-keyframes rotation-star {
+		from {
+				-webkit-transform: rotate(0deg);
+				 transform: rotate(0deg);
+		}
+		to {
+				-webkit-transform: rotate(359deg);
+				 transform: rotate(359deg);
+		}
+}
+
+@-keyframes rotation-star{
+    from {
+         -webkit-transform: rotate(0deg);
+          transform: rotate(0deg);
+    }
+    to {
+         -webkit-transform: rotate(359deg);
+          transform: rotate(359deg);
+    }
+}
+  </style>
+  
+</head>
+<body class="aadi">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="slider.js" type="text/javascript"></script> 
+<script type="text/javascript">
+$(document).ready(function(){$curtainopen=!1,$(".rope").click(function(){return $(this).blur(),0==$curtainopen?($(this).stop().animate({top:"-171%"},{queue:!1,duration:350,easing:"easeOutBounce"}),$(".leftcurtain").stop().animate({width:"1px"},2e3),$(".rightcurtain").stop().animate({width:"1px"},2e3),$curtainopen=!0):($(this).stop().animate({top:"-40px"},{queue:!1,duration:350,easing:"easeOutBounce"}),$(".leftcurtain").stop().animate({width:"50%"},2e3),$(".rightcurtain").stop().animate({width:"51%"},2e3),$curtainopen=!1),!1})});
+
+</script>
+<script>
+  function play(){
        var audio = document.getElementById("audio");
        audio.play();
                  }
+   </script>
+
+<audio id="audio" src="a.mp3?v=778866" ></audio>
+<a class="rope" style="text-decoration:none;" href="#" onclick="play()"><br>
+<div style="font-size: 25px;text-shadow: 1px 1px 3px #ff0707, 1px 1px 3px #ff0505, -1px -1px 3px red, -1px -1px 3px black;color:white;font-weight: bold;"><br><b>इस जादुई पतंग को <br>  टच करके देखो !<br>👇👇👇</b></div><br>
+
+<div class="animated pulse">
+<img id="loading" src="img/root.png?v=778866" class="center animated pulse" style="max-width:250px; width: 80%;" />
+</div>
+</a>
+<div class="leftcurtain"><img src="img/parda212.jpg?v=778866"/></div>
+<div class="rightcurtain"><img src="img/parda212.jpg?v=778866"/></div>
+<marquee class="m1" behavior="scroll" direction="up" scrolldelay="0"> <br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+
+</marquee>
+<marquee class="m2" behavior="scroll" direction="down" scrolldelay="0"> <br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/3.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/4.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/5.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/6.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/1.png?v=778866" height="40px" width="30px"/><br><br>
+<img src="img/2.png?v=778866" height="40px" width="30px"/><br><br>
+
+</marquee>
+
+<div class="mainContainer">
+<!--300x50 real thumb with intro page-->
+<center>
+
+</center>
+<!--300x50 real thumb with intro page-->
+<br>
+<div style="animation: swing 4s infinite;">
+<h1 style="background: url(img/bdbd.gif?v=778866);-webkit-text-fill-color: transparent;-webkit-background-clip: text;-webkit-text-stroke: 2px black;" id="name">तनुज गंभीर </h1>
+</div>
+        <h2 class="fromMessage" id="fromMessage"></h2>
+ <img src="img/wish.png?v=778866" width="60%">
+ <div style="font-size: 10px; font-weight: 550; color: black;">
+	 <p id="demo"></p>
+</div>
+<br><br>
+
+
+ <img src="" width="90%" height="auto" style="animation: pulse 2s infinite"><br>
+<br>
+<br>
+<img src="Whats.jpg" class="center" style="animation: pulse 2.5s infinite; width:  80%; height: 200px;">
+<br><br>
+
+<div style="background-color: #f148fc;border-radius: 17px;border: 0px solid rgb(0, 0, 0);box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;color: #fff;font-family: arial, sans-serif;font-size: 18px;font-stretch: normal;font-style: normal;font-variant: normal;line-height: normal;margin: 5px auto;padding: 4px 5px 3px;width: 82%;">
+<marquee behavior="alternate"><b>
+🪁 तन में मस्ती, मन में उमंग, 🏮</b></marquee>
+</div>
+<div style="background-color: #9000ff;border-radius: 17px;border: 0px solid rgb(0, 0, 0);box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;color: #fff;font-family: arial, sans-serif;font-size: 18px;font-stretch: normal;font-style: normal;font-variant: normal;line-height: normal;margin: 5px auto;padding: 4px 5px 3px;width: 82%;">
+<marquee behavior="alternate"><b>
+🪁 चलो आकाश में डाले रंग, 🏮</b></marquee>
+</div>
+<div style="background-color: #ff6600;border-radius: 17px;border: 0px solid rgb(0, 0, 0);box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;color: #fff;font-family: arial, sans-serif;font-size: 18px;font-stretch: normal;font-style: normal;font-variant: normal;line-height: normal;margin: 5px auto;padding: 4px 5px 3px;width: 82%;">
+<marquee behavior="alternate"><b>
+🪁 हो जाये सब संग संग, 🏮</b></marquee>
+</div>
+<div style="background-color: #10e43a;border-radius: 17px;border: 0px solid rgb(0, 0, 0);box-shadow: rgba(0, 0, 0, 0.2) 5px 5px 5px;color: #fff;font-family: arial, sans-serif;font-size: 18px;font-stretch: normal;font-style: normal;font-variant: normal;line-height: normal;margin: 5px auto;padding: 4px 5px 3px;width: 82%;">
+<marquee behavior="alternate"><b>
+🪁 उडाए पतंग 🏮</b></marquee>
+</div>
+<div class="wishMessage" style="">
+<p style="color: #3d07ff;">
+॥🪁 हैप्पी मकर संक्रांति 🪁॥
+</p>
+</div>
+<br>
+<!--300x50 real thumb with intro page-->
+<center>
+
+</center>
+<!--300x50 real thumb with intro page-->
+<br>
+<div class="glow">यहाँ अपना नाम लिखें और देखें बटन दबाएँ 👇</b></h1></div>
+</div>
+<br><br>
+<form method="POST" action="ready.php">
+<div class="enter-name">
+		<input class="animated pulse infinite" type="name" required="" maxlength="50" name="n" placeholder="👉यहाँ अपना नाम लिखें...">
+		<button class="btn animated shake infinite" type="submit"><span>👉देखें</span></button>
+	</div>
+</form>
+<script>
+function carousel(){var e,l=document.getElementsByClassName("mySlides");for(e=0;e<l.length;e++)l[e].style.display="none";++myIndex>l.length&&(myIndex=1),l[myIndex-1].style.display="block",setTimeout(carousel,2e3)}carousel();
 
 </script>
 
-<body onload =updatealert() style= "background-color : #CDC9C9">
-<form style="
-    position: relative;
-    top: 30%;
-    width: 400;
-    height: 150;
-    border-radius: 1rem;
-    left: 30%;
-    background: #000e5a;
-    padding: 1rem;
-    font-style: italic;
-    font-size: 15;
-    color: white;"
-      >
-<lable id="numberlable">Enter your Number</lable>
-<input id="UsrNbr" style="
-    border-color: black;
-    border-radius: 1rem;
-    height: 2rem;
-    margin-left: 1rem;
-    margin-bottom: .5rem;
-    background: #e6e3e3;
-" type="text"/>
-<br>
-<select id="langoption" style="position: absolute;
-    right: 13px;
-    left: 330px;
-    top: 26px;
-    border-radius: 1rem;
-    height: 18px;
-    text-align: center;
-    background-color: steelblue;
-    color: white;
-    box-shadow: none;" >
-	<option value=0 selected> English</option>
-	<option value=1> Hindi </option>
-	<option value=2> Punjabi </option>
-</select>
-<lable id="wordlable"> Your Number in Words</lable>
-<textarea id ="NbrWrd" rows="3" cols="30" style="
-    border-color: black;
-     height: 3rem;
-    background: #e6e3e3;
-">
-</textarea>
-<br>
-<button id="Subbtn" type="button" style = "width: 6rem;
-					   color: white;
-					   background-color: steelblue;
-					   margin-top: 8%;
-					   border: none;
-					   border-radius: 1rem;
-					   height: 1.4rem;
-					   margin-left: 1rem;
-					   "onClick=numbertoWord1()>Convert </button>
-<button id="Copybtn" type="button" onClick=copyBtn() style="
-    width: 6rem;
-    color: white;
-    background-color: steelblue;
-    margin: 10;
-    border: none;
-    border-radius: 1rem;
-    height: 1.4rem;">Copy </button>
-<button id="readbtn" type="button" onClick=readNumber() style="
-    width: 8rem;
-    color: white;
-    background-color: steelblue;
-    margin: 10;
-    border: none;
-    border-radius: 1rem;
-    height: 1.4rem;
-"> Read Out Laud!</button>
+<script> 
 
-</form>
-<audio id="audio" src="https://github.com/r1singh/Jscode/blob/main/crowd.mp3" ></audio>
-<a class="rope" style="text-decoration:none;" href="#" onclick="play()"> click here<br>
+var countDownDate=new Date("Jan 13, 2025 00:00:00").getTime(),x=setInterval(function(){var e=(new Date).getTime(),o=countDownDate-e,t=Math.floor(o/864e5),n=Math.floor(o%864e5/36e5),a=Math.floor(o%36e5/6e4),l=Math.floor(o%6e4/1e3);document.getElementById("demo").innerHTML=t+"<font color='black'> दिन,</font> "+n+"<font color='black'> घंटे,</font> "+a+"<font color='black'>  मिनट,<br></font> "+l+"<font color='black'> सेकंड <spna style='color:red'>पहले</span> </font>",o<0&&(clearInterval(x),document.getElementById("demo").innerHTML="")},1e3); q
+</script>
+
 
 </body>
-</HTML>
+
+
+
+</html>
